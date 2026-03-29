@@ -1057,7 +1057,12 @@ elif mode == "Region":
             st.session_state.selected_element = elem
             st.session_state.region_run = True
 
-    if st.session_state.get("region_run", False):
+    # 👇 PLACEHOLDER (important position)
+    region_placeholder = st.empty()
+
+    # ---------------- OUTPUT ----------------
+    if st.session_state.region_run and st.session_state.selected_element:
+
         with st.spinner("Načítám data..."):
             plot_region_element(
                 selected_region,
@@ -1067,6 +1072,13 @@ elif mode == "Region":
             )
 
         st.session_state.region_run = False
+
+    else:
+        # 👇 placeholder message instead of empty space
+        region_placeholder.markdown(
+            "<p style='color:#444;'>Zobrazí vybraný prvek pro všechny dostupné stanice v kraji do jednoho grafu</p>",
+            unsafe_allow_html=True
+        )
 
 # ---------------- FORECAST MODE ----------------
 elif mode == "Textové předpovědi":
