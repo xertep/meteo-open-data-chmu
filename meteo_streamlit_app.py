@@ -11,6 +11,13 @@ from streamlit_extras.stylable_container import stylable_container
 import re
 
 
+# ---------------- STATE INIT (TOP OF APP) ----------------
+if "selected_element" not in st.session_state:
+    st.session_state.selected_element = None
+
+if "region_run" not in st.session_state:
+    st.session_state.region_run = False
+
 
 # Change browser tab title and favicon
 st.set_page_config(
@@ -979,11 +986,24 @@ def fetch_mountain(mountain_code):
     return "".join(output_lines)
 
 
+
 # ---------------- UI ----------------
 st.title("ČHMÚ meteostanice a předpovědi počasí")
 
 # ---------------- MODE ----------------
 mode = st.radio("Režim", ["Stanice", "Region", "Textové předpovědi"])
+
+if "last_mode" not in st.session_state:
+    st.session_state.last_mode = None
+
+if st.session_state.last_mode != mode:
+
+    # leaving Region → always reset region state
+    if st.session_state.last_mode == "Region":
+        st.session_state.selected_element = None
+        st.session_state.region_run = False
+
+    st.session_state.last_mode = mode
 
 # ---------------- STATION MODE ----------------
 if mode == "Stanice":
@@ -1030,16 +1050,14 @@ elif mode == "Region":
         "Vlhkost": "H"
     }
 
-    if "selected_element" not in st.session_state:
-        st.session_state.selected_element = None
-
     cols = st.columns(len(elements_buttons))
 
     for i, (label, elem) in enumerate(elements_buttons.items()):
-        if cols[i].button(label):
+        if cols[i].button(label, key=f"btn_{elem}"):
             st.session_state.selected_element = elem
+            st.session_state.region_run = True
 
-    if st.session_state.selected_element:
+    if st.session_state.get("region_run", False):
         with st.spinner("Načítám data..."):
             plot_region_element(
                 selected_region,
@@ -1047,6 +1065,8 @@ elif mode == "Region":
                 regions,
                 stations
             )
+
+        st.session_state.region_run = False
 
 # ---------------- FORECAST MODE ----------------
 elif mode == "Textové předpovědi":
