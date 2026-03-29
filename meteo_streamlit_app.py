@@ -1136,7 +1136,10 @@ elif mode == "Textové předpovědi":
     with st.spinner("Načítám data..."):
 
         if active is None:
-            forecast_placeholder.markdown("Vyber konkrétní oblast")
+            forecast_placeholder.markdown(
+                "<p style='color:#444;'>Vyber konkrétní oblast</p>",
+                unsafe_allow_html=True
+            )
             st.stop()
 
         kind, value = active
