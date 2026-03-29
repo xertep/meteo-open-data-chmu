@@ -1081,7 +1081,7 @@ elif mode == "Region":
         with st.spinner("Načítám data..."):
             plot_region_element(
                 selected_region,
-                st.session_state.selected_element,
+                selected_element,
                 regions,
                 stations
             )
