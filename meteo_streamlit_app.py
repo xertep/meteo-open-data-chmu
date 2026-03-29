@@ -1054,7 +1054,6 @@ elif mode == "Region":
         default=list(regions.keys())[0]
     )
 
-    st.markdown("Prvek")
 
     elements_buttons = {
         "Teplota": "T",
@@ -1066,7 +1065,7 @@ elif mode == "Region":
     }
 
     selected_element_label = st.segmented_control(
-        "",
+        "Prvek",
         list(elements_buttons.keys()),
         key="region_element_selector"
     )
