@@ -1021,6 +1021,9 @@ if mode == "Stanice":
         index=default_index
     )
 
+    # 👇 CREATE PLACEHOLDER HERE (important)
+    station_placeholder = st.empty()
+
     if st.button("Zobraz data"):
         station_info = stations[station_name]
         wsi = station_info["wsi"]
@@ -1028,12 +1031,15 @@ if mode == "Stanice":
 
         with st.spinner("Načítám data..."):
             df = fetch_station_data(wsi)
-        plot_station(df, station_name, elevation)
+
+        # 👇 render inside placeholder
+        with station_placeholder.container():
+            plot_station(df, station_name, elevation)
 
     else:
-        # 👇 placeholder message instead of empty space
-        region_placeholder.markdown(
-            "<p style='color:#444;'>Zobrazí graf vybrané stanice</p>",
+        # 👇 placeholder message
+        station_placeholder.markdown(
+            "<p style='color:#444;'>👉 Zobrazí graf vybrané stanice</p>",
             unsafe_allow_html=True
         )
 
