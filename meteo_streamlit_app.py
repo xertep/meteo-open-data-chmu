@@ -991,7 +991,7 @@ def fetch_mountain(mountain_code):
 st.title("ČHMÚ meteostanice a předpovědi počasí")
 
 # ---------------- MODE ----------------
-mode = st.radio("Režim", ["Stanice", "Region", "Textové předpovědi"])
+mode = st.radio("Zvol režim", ["Stanice", "Region", "Textové předpovědi"])
 
 if "last_mode" not in st.session_state:
     st.session_state.last_mode = None
@@ -1007,6 +1007,8 @@ if st.session_state.last_mode != mode:
 
 # ---------------- STATION MODE ----------------
 if mode == "Stanice":
+
+    st.subheader("Graf vybrané stanice")
 
     station_list = list(stations.keys())
 
@@ -1027,6 +1029,13 @@ if mode == "Stanice":
         with st.spinner("Načítám data..."):
             df = fetch_station_data(wsi)
         plot_station(df, station_name, elevation)
+
+    else:
+        # 👇 placeholder message instead of empty space
+        region_placeholder.markdown(
+            "<p style='color:#444;'>Zobrazí graf vybrané stanice</p>",
+            unsafe_allow_html=True
+        )
 
 # ---------------- REGION MODE ----------------
 elif mode == "Region":
