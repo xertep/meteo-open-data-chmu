@@ -1021,10 +1021,12 @@ if mode == "Stanice":
         index=default_index
     )
 
-    # 👇 CREATE PLACEHOLDER HERE (important)
+    show_data = st.button("Zobraz data")
+
+    # 👇 PLACEHOLDER HERE (after button!)
     station_placeholder = st.empty()
 
-    if st.button("Zobraz data"):
+    if show_data:
         station_info = stations[station_name]
         wsi = station_info["wsi"]
         elevation = station_info["elevation"]
@@ -1032,12 +1034,10 @@ if mode == "Stanice":
         with st.spinner("Načítám data..."):
             df = fetch_station_data(wsi)
 
-        # 👇 render inside placeholder
         with station_placeholder.container():
             plot_station(df, station_name, elevation)
 
     else:
-        # 👇 placeholder message
         station_placeholder.markdown(
             "<p style='color:#444;'>👉 Zobrazí graf vybrané stanice</p>",
             unsafe_allow_html=True
