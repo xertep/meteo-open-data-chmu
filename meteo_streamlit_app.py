@@ -1039,7 +1039,10 @@ elif mode == "Region":
         default=list(regions.keys())[0]
     )
 
-    st.subheader("Prvek")
+    st.markdown(
+        "<p style='font-size:14px; font-weight:600; color:#444; margin-bottom:4px;'>Prvek</p>",
+        unsafe_allow_html=True
+    )
 
     elements_buttons = {
         "Teplota": "T",
