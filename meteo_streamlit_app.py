@@ -1054,7 +1054,6 @@ elif mode == "Region":
         default=list(regions.keys())[0]
     )
 
-
     elements_buttons = {
         "Teplota": "T",
         "T přízemní": "TPM",
@@ -1072,11 +1071,22 @@ elif mode == "Region":
 
     selected_element = elements_buttons.get(selected_element_label)
 
-    # 👇 PLACEHOLDER (important position)
+    # 👇 INIT
+    if "region_run" not in st.session_state:
+        st.session_state.region_run = False
+
+    if "last_selected_element" not in st.session_state:
+        st.session_state.last_selected_element = None
+
+    # 👇 Detect CHANGE (this is the key)
+    if selected_element != st.session_state.last_selected_element:
+        st.session_state.region_run = True
+        st.session_state.last_selected_element = selected_element
+
     region_placeholder = st.empty()
 
     # ---------------- OUTPUT ----------------
-    if selected_element:
+    if st.session_state.region_run and selected_element:
 
         with st.spinner("Načítám data..."):
             plot_region_element(
@@ -1086,8 +1096,9 @@ elif mode == "Region":
                 stations
             )
 
+        st.session_state.region_run = False
+
     else:
-        # 👇 placeholder message instead of empty space
         region_placeholder.markdown(
             "<p style='color:#444;'>Zobrazí vybraný prvek pro všechny dostupné stanice v kraji do jednoho grafu</p>",
             unsafe_allow_html=True
