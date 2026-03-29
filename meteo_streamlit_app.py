@@ -1065,18 +1065,19 @@ elif mode == "Region":
         "Vlhkost": "H"
     }
 
-    cols = st.columns(len(elements_buttons))
+    selected_element_label = st.segmented_control(
+        "",
+        list(elements_buttons.keys()),
+        key="region_element_selector"
+    )
 
-    for i, (label, elem) in enumerate(elements_buttons.items()):
-        if cols[i].button(label, key=f"btn_{elem}"):
-            st.session_state.selected_element = elem
-            st.session_state.region_run = True
+    selected_element = elements_buttons.get(selected_element_label)
 
     # 👇 PLACEHOLDER (important position)
     region_placeholder = st.empty()
 
     # ---------------- OUTPUT ----------------
-    if st.session_state.region_run and st.session_state.selected_element:
+    if selected_element:
 
         with st.spinner("Načítám data..."):
             plot_region_element(
@@ -1085,8 +1086,6 @@ elif mode == "Region":
                 regions,
                 stations
             )
-
-        st.session_state.region_run = False
 
     else:
         # 👇 placeholder message instead of empty space
