@@ -1039,7 +1039,7 @@ if mode == "Stanice":
 
     else:
         station_placeholder.markdown(
-            "<p style='color:#444;'>👉 Zobrazí graf vybrané stanice</p>",
+            "<p style='color:#444;'>Zobrazí graf vybrané stanice</p>",
             unsafe_allow_html=True
         )
 
