@@ -1039,7 +1039,7 @@ elif mode == "Region":
         default=list(regions.keys())[0]
     )
 
-    st.markdown("**Prvek**")
+    st.markdown("Prvek")
 
     elements_buttons = {
         "Teplota": "T",
