@@ -1112,7 +1112,7 @@ elif mode == "Textové předpovědi":
     # ---------------- STEP 1 ----------------
     mode_choice = st.segmented_control(
         "Co chceš zobrazit?",
-        ["Kraje a ČR", "Horské oblasti"],
+        ["Kraje", "Horské oblasti"],
         key="forecast_type"
     )
 
@@ -1121,7 +1121,7 @@ elif mode == "Textové předpovědi":
     # ---------------- REGIONS ----------------
     if mode_choice == "Kraje":
 
-        st.markdown("### Kraje a ČR")
+        st.markdown("### Kraje")
 
         region_codes = ["KV","PL","UL","SC","PH","CB","LB","HK","PU","VY","OL","JM","MS","ZL","CR"]
         region_codes_cz = ["KV","PL","UL","SC","PH","CB","LB","HK","PU","VY","OL","JM","MS","ZL","ČR"]
