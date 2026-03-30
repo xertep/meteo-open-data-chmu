@@ -1039,7 +1039,7 @@ if mode == "Stanice":
 
     else:
         station_placeholder.markdown(
-            "<p style='color:#444;'>Zobrazí graf vybrané stanice</p>",
+            "<p style='color:#666;'>Zobrazí graf vybrané stanice</p>",
             unsafe_allow_html=True
         )
 
@@ -1100,7 +1100,7 @@ elif mode == "Region":
 
     else:
         region_placeholder.markdown(
-            "<p style='color:#444;'>Zobrazí vybraný prvek pro všechny dostupné stanice v kraji do jednoho grafu</p>",
+            "<p style='color:#666;'>Zobrazí vybraný prvek pro všechny dostupné stanice v kraji do jednoho grafu</p>",
             unsafe_allow_html=True
         )
 
@@ -1161,7 +1161,7 @@ elif mode == "Textové předpovědi":
 
         if active is None:
             forecast_placeholder.markdown(
-                "<p style='color:#444;'>Vyber konkrétní oblast</p>",
+                "<p style='color:#666;'>Vyber konkrétní oblast</p>",
                 unsafe_allow_html=True
             )
             st.stop()
