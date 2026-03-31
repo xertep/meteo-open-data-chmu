@@ -5,6 +5,8 @@ Další funkce umožňují zobrazit různé meteorologické prvky z kraje v jedn
 Dále slouží k zobrazení všech dostupných textových předpovědí počasí v jednoduchém, tradičním stylu. Obsahuje předpovědi pro jednotlivé kraje, celou Českou republiku i vybraná pohoří.
 Všechny předpovědi jsou psány lidskými meteorology a nejsou automaticky generovány z numerických modelů.
 
+V aplikaci je i možnost zobrazení 24h sum srážek z modelu Aladin.
+
 Funkční webová aplikace (vytvořená pomocí Streamlit) je dostupná zde: https://meteo-open-data-chmu.streamlit.app/
 
 Aplikaci může při otevření trvat několik sekund, než se načte, zejména pokud byla delší dobu neaktivní je potřeba ji probudit kliknutím na modré tlačítko.
@@ -17,6 +19,8 @@ Additional features allow users to visualize various meteorological elements fro
 
 Another section displays all available text weather forecasts in a simple, classic style. It includes forecasts for individual regions, the entire Czech Republic, and selected mountain ranges.
 All forecasts are written by human meteorologists and are not automatically generated from weather models.
+
+It is also possible to show 24h precipitation sums from the model Aladin.
 
 A live version of the web application (built with Streamlit) is available here: https://meteo-open-data-chmu.streamlit.app/
 
