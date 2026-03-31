@@ -9,6 +9,7 @@ import math
 from matplotlib.cm import get_cmap
 from streamlit_extras.stylable_container import stylable_container
 import re
+import requests
 
 
 # ---------------- STATE INIT (TOP OF APP) ----------------
@@ -1183,6 +1184,14 @@ elif mode == "Srážkové mapy 24h Aladin":
 
     BASE_URL_FLOODS = "https://opendata.chmi.cz/meteorology/floods/"
 
+    def run_has_data(run):
+        test_url = f"{BASE_URL_FLOODS}floods_prec24h_{run}+24.png"
+        try:
+            r = requests.head(test_url, timeout=5)
+            return r.status_code == 200
+        except:
+            return False
+
     # --- Generate last 8 runs ---
     def get_last_runs(n=8):
         now = datetime.utcnow()
@@ -1198,7 +1207,12 @@ elif mode == "Srážkové mapy 24h Aladin":
 
         return runs
 
-    runs = get_last_runs(8)
+    runs_raw = get_last_runs(8)
+    runs = [r for r in runs_raw if run_has_data(r)]
+
+    if not runs:
+        st.warning("Data zatím nejsou dostupná pro žádný modelový běh.")
+        st.stop()
 
     # --- Selector ---
     selected_run = st.segmented_control(
