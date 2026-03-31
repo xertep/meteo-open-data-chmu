@@ -1207,8 +1207,9 @@ elif mode == "Srážkové mapy 24h Aladin":
 
         return runs
 
-    runs_raw = get_last_runs(8)
-    runs = [r for r in runs_raw if run_has_data(r)]
+    with st.spinner("Načítám data..."):
+        runs_raw = get_last_runs(8)
+        runs = [r for r in runs_raw if run_has_data(r)]
 
     if not runs:
         st.warning("Data zatím nejsou dostupná pro žádný modelový běh.")
