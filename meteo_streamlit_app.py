@@ -931,28 +931,6 @@ def fetch_region(region_code):
                 # remove pCK2tx (duplicate day)
                 all_data = [x for x in all_data if x[0] != "pCK2tx"]
 
-    # --- MERGE NIGHT + NEXT DAY HEADLINE (regions only) ---
-    if region_code != "CR":
-        pckn = next((x for x in all_data if x[0] == "pCKntx"), None)
-        pck1 = next((x for x in all_data if x[0] == "pCK1tx"), None)
-    
-        if pckn and pck1:
-            night_pattern, night_headline, night_items, night_sender, night_time, night_created = pckn
-            day_pattern, day_headline, day_items, day_sender, day_time, day_created = pck1
-    
-            if night_headline and day_headline:
-                last_word = day_headline.strip().split()[-1]
-                merged_headline = f"{night_headline} a {last_word}"
-    
-                # update night headline
-                for i, (p, h, items, sender, t, created) in enumerate(all_data):
-                    if p == "pCKntx":
-                        all_data[i] = (p, merged_headline, items, sender, t, created)
-    
-            for i, (p, h, items, sender, t, created) in enumerate(all_data):
-                if p == "pCK1tx":
-                    all_data[i] = (p, "", items, sender, t, created)
-
     if region_code == "CR":
         times = {p: t for p, _, _, _, t, _ in all_data}
 
@@ -1028,7 +1006,7 @@ def fetch_region(region_code):
         if morning_found and pattern == "pCK2tx":
             continue
 
-        if pattern not in ["pCK2tx", "pCK3tx", "pCK4tx", "pCR2tx", "pCR3tx", "pCR4tx", "pCR5tx", "pCR8tx"] and headline_main:
+        if pattern not in ["pCKntx", "pCK2tx", "pCK3tx", "pCK4tx", "pCR2tx", "pCR3tx", "pCR4tx", "pCR5tx", "pCR8tx"] and headline_main:
             output_lines.append(f'<br><b>{headline_main}</b><br>')
 
         for item in items:
@@ -1343,6 +1321,11 @@ elif mode == "Textové předpovědi":
 
 # ---------------- PRECIP MODE ----------------
 elif mode == "Srážkové mapy 24h Aladin":
+
+    st.markdown(
+        'Víc map z Aladina (experiment) ➡ <a href="https://aladin-open-data-chmu.streamlit.app/" target="_blank"><b>zde</b></a>',
+        unsafe_allow_html=True
+    )
 
     st.subheader("24h srážky – Aladin")
 
