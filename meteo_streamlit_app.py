@@ -1345,11 +1345,14 @@ elif mode == "Textové předpovědi":
 elif mode == "Mapy Aladin":
 
     st.markdown(
-        '#### Víc map z Aladina najdete <a href="https://aladin-open-data-chmu.streamlit.app/" target="_blank"><b>tady</b></a>',
+        '### Víc map z Aladina najdete <a href="https://aladin-open-data-chmu.streamlit.app/" target="_blank"><b>tady</b></a>',
         unsafe_allow_html=True
     )
 
-    st.subheader("24h srážky – Aladin")
+    st.markdown(
+        '##### 24h srážky ▼',
+        unsafe_allow_html=True
+    )
 
     BASE_URL_FLOODS = "https://opendata.chmi.cz/meteorology/floods/"
 
