@@ -1346,10 +1346,9 @@ elif mode == "Mapy Aladin":
 
     st.markdown(
         """
-        ### Víc map z Aladina najdete <a href="https://aladin-open-data-chmu.streamlit.app/" target="_blank"><b>tady</b></a>
-        <br>
+        <h3 style="margin-bottom:2px;">Víc map z Aladina najdete tady:</h3>
         <a href="https://aladin-open-data-chmu.streamlit.app/" target="_blank">
-        https://aladin-open-data-chmu.streamlit.app/
+            https://aladin-open-data-chmu.streamlit.app/
         </a>
         """,
         unsafe_allow_html=True
