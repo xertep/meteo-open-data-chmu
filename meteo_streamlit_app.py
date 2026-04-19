@@ -1346,7 +1346,8 @@ elif mode == "Mapy Aladin":
 
     st.markdown("### Víc map z Aladina najdete tady:")
     st.markdown("[https://aladin-open-data-chmu.streamlit.app/](https://aladin-open-data-chmu.streamlit.app/)")
-    
+
+    st.markdown("###  ")
     st.markdown(
         '##### 24h srážky ▼',
         unsafe_allow_html=True
