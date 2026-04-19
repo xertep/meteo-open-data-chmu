@@ -1156,7 +1156,7 @@ def fetch_mountain(mountain_code):
 st.title("ČHMÚ meteostanice a předpovědi počasí")
 
 # ---------------- MODE ----------------
-mode = st.radio("Zvol režim", ["Stanice", "Region", "Textové předpovědi", "Srážkové mapy 24h Aladin"])
+mode = st.radio("Zvol režim", ["Stanice", "Region", "Textové předpovědi", "Mapy Aladin"])
 
 if "last_mode" not in st.session_state:
     st.session_state.last_mode = None
@@ -1342,7 +1342,7 @@ elif mode == "Textové předpovědi":
 
 
 # ---------------- PRECIP MODE ----------------
-elif mode == "Srážkové mapy 24h Aladin":
+elif mode == "Mapy Aladin":
 
     st.markdown(
         '#### Víc map z Aladina najdete <a href="https://aladin-open-data-chmu.streamlit.app/" target="_blank"><b>tady</b></a>',
