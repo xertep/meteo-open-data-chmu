@@ -1345,10 +1345,16 @@ elif mode == "Textové předpovědi":
 elif mode == "Mapy Aladin":
 
     st.markdown(
-        '### Víc map z Aladina najdete <a href="https://aladin-open-data-chmu.streamlit.app/" target="_blank"><b>tady</b></a>',
+        """
+        ### Víc map z Aladina najdete <a href="https://aladin-open-data-chmu.streamlit.app/" target="_blank"><b>tady</b></a>
+        <br>
+        <a href="https://aladin-open-data-chmu.streamlit.app/" target="_blank">
+        https://aladin-open-data-chmu.streamlit.app/
+        </a>
+        """,
         unsafe_allow_html=True
     )
-
+    
     st.markdown(
         '##### 24h srážky ▼',
         unsafe_allow_html=True
