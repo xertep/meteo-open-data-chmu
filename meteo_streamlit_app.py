@@ -1353,7 +1353,7 @@ elif mode == "Mapy Aladin":
 
     BASE_URL_FLOODS = "https://opendata.chmi.cz/meteorology/floods/"
 
-    @st.cache_data(ttl=600, show_spinner="Načítám data...")
+    @st.cache_data(ttl=60, show_spinner=False)
     def get_last_runs_from_server(n=8):
         url = "https://opendata.chmi.cz/meteorology/floods/"
 
@@ -1361,21 +1361,26 @@ elif mode == "Mapy Aladin":
             response = requests.get(url, timeout=10)
             response.raise_for_status()
 
-            pattern = re.compile(r"floods_prec24h_(\d{10})\+\d+\.png")
+            pattern = re.compile(r"floods_prec24h_(\d{10})\+(\d+)\.png")
             matches = pattern.findall(response.text)
 
             if not matches:
                 return []
 
-            newest_run = max(matches)   # newest timestamp string
+            newest_run, _ = max(
+                matches,
+                key=lambda x: (
+                    datetime.strptime(x[0], "%Y%m%d%H"),
+                    int(x[1])
+                )
+            )
+
             newest_dt = datetime.strptime(newest_run, "%Y%m%d%H")
 
-            runs = []
-            for i in range(n):
-                dt = newest_dt - timedelta(hours=6 * i)
-                runs.append(dt.strftime("%Y%m%d%H"))
-
-            return runs
+            return [
+                (newest_dt - timedelta(hours=6*i)).strftime("%Y%m%d%H")
+                for i in range(n)
+            ]
 
         except Exception:
             return []
