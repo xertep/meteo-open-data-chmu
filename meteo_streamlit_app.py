@@ -12,6 +12,8 @@ import re
 from email.utils import parsedate_to_datetime
 import pytz
 
+import xml.etree.ElementTree as ET
+
 
 # ---------------- STATE INIT (TOP OF APP) ----------------
 if "selected_element" not in st.session_state:
